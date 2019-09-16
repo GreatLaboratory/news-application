@@ -1,28 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <tool-bar/>
+    <!-- 여기서 만약 url이 /news로 들어오면 아래 <router-view/>는 자동으로 마법처럼 <NewsView/>로 바뀐다. -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ToolBar from "@/components/ToolBar";
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: {ToolBar}
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    padding: 0;
+    margin: 0;
+  }
 </style>
