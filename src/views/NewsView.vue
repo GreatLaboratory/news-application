@@ -1,29 +1,29 @@
 <template>
     <div>
-        <div v-for="user in users" :key="user.id">{{ user }}</div>
+        <p v-for="item in news" :key="item.id">
+            <a :href="item.url">{{ item.title }}</a>
+            <small> {{ item.time_ago }} by {{ item.user }}</small>
+        </p>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
-
+    import { mapState, mapActions } from 'vuex'
     export default {
         name: "NewsView",
-        data() {
-            return {
-                users : []
-            }
-        },
         created() {
-            axios.get('https://api.hnpwa.com/v0/news/1.json')
-                .then((res)=>{
-                    console.log(res);
-                    this.users = res.data;
-            })
-                .catch((err)=>{
-                    console.log(err)
-                })
-        }
+            this.FETCH_NEWS();
+        },
+        methods: {
+            ...mapActions([
+                'FETCH_NEWS'
+            ])
+        },
+        computed : {
+            ...mapState([
+                'news'
+            ])
+        },
     }
 </script>
 
