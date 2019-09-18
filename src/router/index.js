@@ -8,7 +8,7 @@ import ItemView from "@/views/ItemView";
 
 Vue.use(VueRouter);
 
-export const router = new VueRouter({
+export default new VueRouter({
     mode: 'history',   // 이게 없으면 전부 url이 /#/ 이렇게 들어옴
     routes:[
         // path : url 주소가 담긴다.
@@ -30,7 +30,7 @@ export const router = new VueRouter({
             component: AskView,
         },
         {
-            path: '/user',
+            path: '/user/:id',
             component: UserView,
         },
         {
