@@ -1,29 +1,14 @@
 <template>
     <div>
-        <p v-for="item in ask" :key="item.id">
-            <a :href="item.url">{{ item.title }}</a>
-            <small> {{ item.time_ago }} by {{ item.user }}</small>
-        </p>
+        <list-item/>
     </div>
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex'
+    import ListItem from "@/components/ListItem";
     export default {
         name: "AskView",
-        computed: {
-            ...mapState([
-                'ask'
-            ])
-        },
-        methods: {
-            ...mapActions([
-                'FETCH_ASK'
-            ])
-        },
-        created() {
-            this.FETCH_ASK();
-        }
+        components: {ListItem},
     }
 </script>
 
