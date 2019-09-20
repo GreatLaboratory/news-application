@@ -1,7 +1,7 @@
 <template>
-    <div v-if="itemList">
+    <div v-if="list">
         <ul class="news-list">
-            <li v-for="item in itemList" :key="item.id" class="post">
+            <li v-for="item in list" :key="item.id" class="post">
                 <!-- point 영역 -->
                 <div class="points">
                     {{ item.points || 0}}
@@ -10,7 +10,9 @@
                 <!-- 기타 영역 -->
                 <div>
                     <p class="news-title">
-                        <a :href="item.url">{{ item.title }}</a>
+                        <!-- 라우터 링크로 url처리하면 트랜지션이 먹히고 a태그로 처리하면 트랜지션이 안된다... 왜일까? -->
+                            <!--<router-link :to="`${item.url}`">{{ item.title }}</router-link>-->
+                            <a :href="item.url">{{ item.title }}</a>
                     </p>
                     <small class="link-text">
                         {{ item.time_ago }} by
@@ -28,42 +30,13 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex'
+    import { mapState } from 'vuex'
     export default {
         name: "ListItem",
-        created() {
-            const path = this.$route.path;
-            if (path === '/news') {
-                this.FETCH_NEWS();
-            } else if (path === '/ask') {
-                this.FETCH_ASK();
-            } else if (path === '/jobs') {
-                this.FETCH_JOBS();
-            }
-        },
-        methods: {
-            ...mapActions([
-                'FETCH_NEWS',
-                'FETCH_ASK',
-                'FETCH_JOBS',
-            ])
-        },
         computed : {
             ...mapState([
-                'news',
-                'jobs',
-                'ask',
+                'list'
             ]),
-            itemList() {
-                const path = this.$route.path;
-                if (path === '/news') {
-                    return this.news
-                } else if (path === '/ask') {
-                    return this.ask
-                } else if (path === '/jobs') {
-                    return this.jobs
-                }
-            }
         },
     }
 </script>
