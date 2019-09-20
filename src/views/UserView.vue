@@ -1,23 +1,27 @@
 <template>
-    <div v-if="user">
-        <p>name : {{ user.id }}</p>
-        <p>karma : {{ user.karma }}</p>
-        <p>created : {{ user.created }}</p>
+    <div>
+        <user-profile>
+            <div slot="username">{{ user.id}}</div>
+            <span slot="time">{{ 'Joined ' + user.created}}, </span>
+            <span slot="karma">{{ user.karma}}</span>
+        </user-profile>
     </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex'
+    import UserProfile from "@/components/UserProfile";
     export default {
         name: "UserView",
-        computed: {
-            ...mapState([
-                'user'
-            ])
-        },
+        components: {UserProfile},
         methods: {
             ...mapActions([
                 'FETCH_USER'
+            ])
+        },
+        computed: {
+            ...mapState([
+                'user'
             ])
         },
         created() {
